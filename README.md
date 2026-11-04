@@ -9,8 +9,8 @@
 
 ## 1. Identificación del proyecto
 
-- **Nombre de la aplicación:** [Nombre]
-- **Equipo e integrantes:** [Nombres y aportes]
+- **Nombre de la aplicación:** Stattum
+- **Equipo e integrantes:** Isabella Hincapie - Manuela Bohorquez - Yuliana Pineda
 - **Enlace a la aplicación:** [Pendiente / URL]
 - **Repositorio del proyecto:** [URL]
 - **Última actualización:** [AAAA-MM-DD]
