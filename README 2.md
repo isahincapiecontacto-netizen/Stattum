@@ -7,16 +7,16 @@
 
 ## 1. Identificación del proyecto
 
-- **Nombre de la aplicación:** Riesgo y rendimiento · FinPy Labs
-- **Equipo e integrantes:** FinPy Labs — [Nombre 1: aportes], [Nombre 2: aportes], [Nombre 3: aportes]
+- **Nombre de la aplicación:** Stattum
+- **Equipo e integrantes:** Isabella Hincapie - Manuela Bohorquez - Yuliana Pineda
 - **Enlace a la aplicación:** [Pendiente: URL de Streamlit Community Cloud]
-- **Repositorio del proyecto:** [URL de GitHub]
+- **Repositorio del proyecto:** https://github.com/isahincapiecontacto-netizen/Stattum 
 - **Última actualización:** 2026-11-03
 
 ## 2. ¿Qué queremos investigar? · S25
 
 - **Situación o fenómeno de interés:** Los inversionistas en Colombia pueden elegir empresas de sectores muy distintos (comercio, energía, banca), y cada una implica un nivel de riesgo diferente. Queremos entender cómo se comportaron en la práctica en la Bolsa de Valores de Colombia (BVC).
-- **Pregunta principal:** *¿Cómo se comportaron el rendimiento y el riesgo de Almacenes Éxito (EXITO.CL), Ecopetrol (ECOPETROL.CL) y Grupo Cibest (PFCIBEST.CL) frente al mercado colombiano (ICOLCAP.CL) durante los últimos cinco años (nov 2021 – nov 2026) y cuál ofreció la mejor relación rendimiento-riesgo?*
+- **Pregunta principal:** *¿Cómo se comportaron el rendimiento y el riesgo de Almacenes Éxito (EXITO.CL), Ecopetrol (ECOPETROL.CL) y Grupo Cibest (PFCIBEST.CL) frente al mercado colombiano (ICOLCAP.CL) durante los últimos cinco años y cuál ofreció la mejor relación rendimiento-riesgo?*
 - **Objetivo del análisis:** Comparar retorno, volatilidad, caídas máximas y correlación entre los cuatro activos, usando datos históricos diarios.
 - **Importancia financiera:** Medir el rendimiento sin medir el riesgo conduce a malas decisiones. Comparar ambos y la correlación entre activos permite evaluar su aporte a la diversificación de un portafolio.
 - **Preguntas complementarias:**
@@ -36,7 +36,7 @@
 | iShares COLCAP | ICOLCAP.CL | ETF | Replica el índice COLCAP; sirve de referencia del mercado (benchmark y base para la beta) |
 
 - **Fuente de datos:** Yahoo Finance mediante la librería [yfinance](https://ranaroussi.github.io/yfinance/)
-- **Período:** 2021-11-03 – 2026-11-03 (ajustable en la app)
+- **Período:** 2020-01-01 – 2026-01-01 (ajustable en la app)
 - **Frecuencia:** Diaria
 - **Variables disponibles:** Fecha, apertura, máximo, mínimo, cierre ajustado, volumen. Usamos el **cierre ajustado** (`auto_adjust=True`).
 - **Limitaciones de los datos:**
