@@ -12,7 +12,7 @@
 - **Equipo e integrantes:** Isabella Hincapie - Manuela Bohorquez - Yuliana Pineda
 - **Enlace a la aplicación:** [Pendiente: URL de Streamlit Community Cloud]
 - **Repositorio del proyecto:** https://github.com/isahincapiecontacto-netizen/Stattum 
-- **Última actualización:** 2026-11-03
+- **Última actualización:** 2026-11-05
 
 ## 2. ¿Qué queremos investigar? · S25
 
@@ -78,7 +78,14 @@ Seleccionamos estos indicadores porque cubren las dos caras de la pregunta (rend
 | Histograma de retornos | ¿Cómo se distribuyen los retornos diarios? | Retorno diario | Colas gruesas, dispersión por activo |
 | Mapa de calor de correlación | ¿Qué activos diversifican? | Correlación de retornos | Correlaciones bajas = mejor diversificación |
 
-**Primer resultado verificable:** [Pega aquí la tabla de indicadores de la app con datos reales y 2–3 líneas de interpretación]
+**Primer resultado verificable:** 
+| Ticker | Retorno acumulado | Retorno anualizado | Volatilidad anual | Sharpe | Máx. drawdown | Beta vs ICOLCAP.CL |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **ECOPETROL.CL** | 73.86% | 11.72% | 37.65% | 0.37 | -37.99% | 0.82 |
+| **EXITO.CL** | 41.61% | 7.22% | 44.56% | 0.28 | -66.59% | 0.43 |
+| **ICOLCAP.CL** | 118.76% | 16.98% | 18.02% | 0.72 | -30.22% | 1.00 |
+| **PFCIBEST.CL** | 267.24% | 29.78% | 31.98% | 0.83 | -32.58% | 0.93 |
+
 
 ## 5. Diseño de la aplicación · S25
 
@@ -91,7 +98,7 @@ Seleccionamos estos indicadores porque cubren las dos caras de la pregunta (rend
 **Flujo previsto:**  
 Selección de activos y parámetros → Descarga con yfinance → Alineación de fechas y cálculo de retornos → Indicadores y gráficos → Lectura automática e interpretación.
 
-**Boceto o esquema:** [Inserta `docs/boceto.png`]
+**Boceto o esquema:** 
 
 **Decisión técnica:** Python por su ecosistema financiero (`pandas`, `numpy`) y acceso directo a datos con `yfinance`. Streamlit permite construir una interfaz interactiva sin programar frontend. Separamos los cálculos en `metricas.py` para poder probarlos de forma independiente.
 
@@ -122,12 +129,21 @@ Selección de activos y parámetros → Descarga con yfinance → Alineación de
 
 *Completa con los resultados reales de la app. Plantilla para cada hallazgo:*
 
-1. **Evidencia:** [Captura o tabla de la app]
-2. **Qué muestra:** [Ej.: Éxito tuvo la mayor volatilidad y el mayor drawdown del grupo]
-3. **Interpretación financiera:** [Ej.: mayor retorno potencial a costa de pérdidas profundas; su Sharpe indica si compensó el riesgo]
-4. **Limitaciones:** [Ej.: un periodo de 5 años incluye ciclos específicos; el resultado cambia según las fechas elegidas]
+1. **Evidencia:** 
 
-**Conclusión provisional o final:** [Respuesta a la pregunta principal, apoyada en Sharpe, drawdown y correlación]
+<img width="1197" height="295" alt="image" src="https://github.com/user-attachments/assets/2a6e9d22-27fa-4617-9488-a0d22ee32642" />
+<img width="1185" height="311" alt="image" src="https://github.com/user-attachments/assets/974986b9-0dc9-4085-b11e-cec884ebd557" />
+<img width="1192" height="310" alt="image" src="https://github.com/user-attachments/assets/1f1b62ff-e98d-413a-9cae-b255a1555479" />
+<img width="1154" height="349" alt="image" src="https://github.com/user-attachments/assets/1d1b553b-5cdd-43f7-a4da-65772f9862c5" />
+
+
+3. **Qué muestra:** ### recimiento de una inversión de 100, Tendencia con medias móviles, Distribución de retornos diarios, correlación
+
+4. **Interpretación financiera:** ¿qué activos ayudan a diversificar? Correlación baja o negativa = mejor diversificación ¿cuánto habría crecido una inversión inicial y en qué momentos cayó?
+   
+6. **Limitaciones:** 
+
+**Conclusión provisional o final:** 
 
 > Los resultados históricos no garantizan rendimientos futuros.
 
