@@ -1,4 +1,3 @@
-[README S-25.md](https://github.com/user-attachments/files/34452823/README.S-25.md)
 # Proyecto de analítica financiera | IX Concurso ITM 2026
 
 **Curso:** Lenguajes de Programación · Ingeniería Financiera  
@@ -11,13 +10,13 @@
 - **Nombre de la aplicación:** Stattum
 - **Equipo e integrantes:** Isabella Hincapie - Manuela Bohorquez - Yuliana Pineda
 - **Enlace a la aplicación:** [Pendiente: URL de Streamlit Community Cloud]
-- **Repositorio del proyecto:** https://github.com/isahincapiecontacto-netizen/Stattum 
-- **Última actualización:** 2026-11-05
+- **Repositorio del proyecto:** [https://github.com/isahincapiecontacto-netizen/Stattum](https://github.com/isahincapiecontacto-netizen/Stattum)
+- **Última actualización:** 2026-11-08
 
 ## 2. ¿Qué queremos investigar? · S25
 
 - **Situación o fenómeno de interés:** Los inversionistas en Colombia pueden elegir empresas de sectores muy distintos (comercio, energía, banca), y cada una implica un nivel de riesgo diferente. Queremos entender cómo se comportaron en la práctica en la Bolsa de Valores de Colombia (BVC).
-- **Pregunta principal:** *¿Cómo se comportaron el rendimiento y el riesgo de Almacenes Éxito (EXITO.CL), Ecopetrol (ECOPETROL.CL) y Grupo Cibest (PFCIBEST.CL) frente al mercado colombiano (ICOLCAP.CL) durante los últimos cinco años y cuál ofreció la mejor relación rendimiento-riesgo?*
+- **Pregunta principal:** *¿Cómo se comportaron el rendimiento y el riesgo de Almacenes Éxito (EXITO.CL), Ecopetrol (ECOPETROL.CL) y Grupo Cibest (PFCIBEST.CL) frente al mercado colombiano (ICOLCAP.CL) durante los últimos cinco años (nov 2021 – nov 2026) y cuál ofreció la mejor relación rendimiento-riesgo?*
 - **Objetivo del análisis:** Comparar retorno, volatilidad, caídas máximas y correlación entre los cuatro activos, usando datos históricos diarios.
 - **Importancia financiera:** Medir el rendimiento sin medir el riesgo conduce a malas decisiones. Comparar ambos y la correlación entre activos permite evaluar su aporte a la diversificación de un portafolio.
 - **Preguntas complementarias:**
@@ -37,13 +36,13 @@
 | iShares COLCAP | ICOLCAP.CL | ETF | Replica el índice COLCAP; sirve de referencia del mercado (benchmark y base para la beta) |
 
 - **Fuente de datos:** Yahoo Finance mediante la librería [yfinance](https://ranaroussi.github.io/yfinance/)
-- **Período:** 2020-01-01 – 2026-01-01 (ajustable en la app)
+- **Período:** 2021-11-09 – 2026-11-06 (fijo para que los resultados sean reproducibles; ajustable en la app)
 - **Frecuencia:** Diaria
 - **Variables disponibles:** Fecha, apertura, máximo, mínimo, cierre ajustado, volumen. Usamos el **cierre ajustado** (`auto_adjust=True`).
 - **Limitaciones de los datos:**
   - Las acciones colombianas tienen menor liquidez: hay días sin negociación. Usamos únicamente **fechas comunes** a todos los activos y, si hace falta, rellenamos huecos de hasta 5 días.
   - Los precios están en **pesos colombianos (COP)**; no se considera el efecto de la tasa de cambio.
-  - Cibest cambió de nombre y de ticker (antes Bancolombia, PFBCOLOM). **Verificar desde qué fecha tiene historial** `PFCIBEST.CL` en Yahoo Finance.
+  - Cibest cambió de nombre y de ticker (antes Bancolombia, PFBCOLOM). En la corrida del notebook (datos hasta 2026-11-06), `PFCIBEST.CL` sí tuvo datos para todo el periodo analizado, desde 2021-11-09.
   - Éxito tuvo cambios de control accionario y tiene poca liquidez: su historial puede mostrar saltos.
   - La tasa libre de riesgo de la app (4 % por defecto) debe ajustarse a una referencia colombiana, por ejemplo TES, y citar la fuente.
   - Los símbolos `.CL` deben confirmarse en Yahoo Finance antes de usarse.
@@ -86,6 +85,9 @@ Seleccionamos estos indicadores porque cubren las dos caras de la pregunta (rend
 | **ICOLCAP.CL** | 118.76% | 16.98% | 18.02% | 0.72 | -30.22% | 1.00 |
 | **PFCIBEST.CL** | 267.24% | 29.78% | 31.98% | 0.83 | -32.58% | 0.93 |
 
+**Qué estamos analizando:** comparamos cuatro activos de la BVC desde cinco dimensiones: **rentabilidad** (retorno acumulado y anualizado), **riesgo** (volatilidad y drawdown), **eficiencia** (Sharpe: retorno obtenido por cada unidad de riesgo), **sensibilidad al mercado** (beta frente al ICOLCAP) y **diversificación** (correlación entre activos). Ningún indicador responde la pregunta por sí solo: hay que leerlos juntos.
+
+**Lectura inicial:** Cibest tuvo el mayor retorno (30,22 % anual) y el mejor Sharpe (0,84), por encima del mercado (ICOLCAP: 17,21 % y 0,73). Su retorno fue 1,76 veces el del mercado y su volatilidad 1,78 veces, por lo que su ventaja en Sharpe es real pero moderada: ganó más, pero asumiendo proporcionalmente más riesgo. Ecopetrol y Éxito rindieron menos que el mercado con una volatilidad de más del doble (37,80 % y 44,56 % frente a 18,00 %).
 
 ## 5. Diseño de la aplicación · S25
 
@@ -129,23 +131,39 @@ Selección de activos y parámetros → Descarga con yfinance → Alineación de
 
 *Completa con los resultados reales de la app. Plantilla para cada hallazgo:*
 
-1. **Evidencia:** 
+1. **Evidencia:**
+   Hallazgo 1: Cibest ofreció la mejor relación rendimiento-riesgo
+**Evidencia:** tabla de indicadores (sección 4) y mapa riesgo-retorno. 
+<img width="1226" height="447" alt="image" src="https://github.com/user-attachments/assets/ed0f05ae-ed77-4c14-8dca-3e4a813c0719" />
+**Qué muestra:** `PFCIBEST.CL` tuvo el mayor retorno anualizado (30,22 %) y el Sharpe más alto (0,84), por encima del mercado (ICOLCAP: 17,21 % y 0,73), con una volatilidad mayor (31,97 % frente a 18,00 %).
+**Interpretación financiera:** el retorno adicional compensó con creces el riesgo adicional: una inversión de 100 habría llegado a 373,6.
+**Limitaciones:** el Sharpe usa una tasa libre de riesgo de 4 %, que no es una referencia colombiana; con tasas más altas los valores bajan. Un periodo de cinco años no garantiza que el resultado se repita.
 
-<img width="1197" height="295" alt="image" src="https://github.com/user-attachments/assets/2a6e9d22-27fa-4617-9488-a0d22ee32642" />
-<img width="1185" height="311" alt="image" src="https://github.com/user-attachments/assets/974986b9-0dc9-4085-b11e-cec884ebd557" />
-<img width="1192" height="310" alt="image" src="https://github.com/user-attachments/assets/1f1b62ff-e98d-413a-9cae-b255a1555479" />
-<img width="1154" height="349" alt="image" src="https://github.com/user-attachments/assets/1d1b553b-5cdd-43f7-a4da-65772f9862c5" />
+### Hallazgo 2: Éxito fue el más riesgoso y rindió menos que el mercado
+**Evidencia:** volatilidad de 44,56 %, drawdown máximo de −66,59 % y Sharpe de 0,30. 
+<img width="1242" height="415" alt="image" src="https://github.com/user-attachments/assets/ac06f929-228b-4d6d-a991-52e1a8aec155" />
+**Qué muestra:** su precio cayó desde el máximo del 25 de marzo de 2022 hasta el mínimo del 11 de abril de 2025 (−66,6 %). Después se recuperó hasta cerrar en 147,8 (base 100).
+**Interpretación financiera:** rindió menos que el mercado (8,14 % frente a 17,21 % anual) con más del doble de volatilidad, así que su riesgo no fue compensado. La fuerte recuperación posterior merece explicarse con una fuente verificada, por ejemplo el cambio de control accionario. 
+**Limitaciones:** acción de baja liquidez y con cambios corporativos, que pueden generar saltos en el historial.
 
+### Hallazgo 3: Éxito es el mejor diversificador
+**Evidencia:** mapa de calor de correlación. 
+<img width="1254" height="455" alt="image" src="https://github.com/user-attachments/assets/97c939b5-548f-439b-9eb5-62cff8988e17" />
+**Qué muestra:** Éxito tiene correlaciones bajas con todos los demás (0,15 con Ecopetrol, 0,17 con ICOLCAP y 0,19 con Cibest), mientras que Cibest e ICOLCAP están más relacionados (0,53) y Ecopetrol con Cibest (0,47). Su beta es de 0,43.
+**Interpretación financiera:** Éxito se movió de forma casi independiente del resto, por lo que combinarlo con Ecopetrol u otras acciones reduciría el riesgo conjunto, aunque por sí solo tuvo el peor Sharpe del grupo.
+**Limitaciones:** la correlación se calculó con retornos diarios y puede cambiar en crisis. El ICOLCAP incluye a estas mismas empresas, por lo que sus correlaciones y betas pueden estar sesgados al alza.
 
-3. **Qué muestra:** ### recimiento de una inversión de 100, Tendencia con medias móviles, Distribución de retornos diarios, correlación
+### Hallazgo 4: Ecopetrol rindió menos que el mercado con el doble de riesgo
+**Evidencia:** tabla de indicadores y gráfico de crecimiento base 100.
+<img width="1239" height="463" alt="image" src="https://github.com/user-attachments/assets/08561dac-b4be-4dab-b5bf-f93af2bc1e2c" />
+**Qué muestra:** retorno anualizado de 13,33 % frente a 17,21 % del ICOLCAP, volatilidad de 37,80 % (más del doble) y Sharpe de 0,41. Ecopetrol y Cibest tocaron su mínimo el mismo día, el 26 de septiembre de 2022 (−38,0 % y −32,6 %); el ICOLCAP lo hizo el 23 de marzo de 2023 (−30,2 %).
+**Interpretación financiera:** su desempeño dependió más de factores propios del sector petrolero que del mercado en general (beta de 0,82).
+**Limitaciones:** el análisis es descriptivo y no explica las causas de cada movimiento.
 
-4. **Interpretación financiera:** ¿qué activos ayudan a diversificar? Correlación baja o negativa = mejor diversificación ¿cuánto habría crecido una inversión inicial y en qué momentos cayó?
-   
-6. **Limitaciones:** 
-
-**Conclusión provisional o final:** 
+**Conclusión:** entre Éxito, Ecopetrol y Cibest, **Cibest (`PFCIBEST.CL`) ofreció la mejor relación rendimiento-riesgo** (Sharpe de 0,84), superando incluso al mercado colombiano (ICOLCAP, 0,73). Ecopetrol (0,41) y Éxito (0,30) rindieron menos que el mercado con mucho más riesgo. Éxito fue el más volátil (44,56 %) y el de mayor caída (−66,59 %), pero también el mejor diversificador (correlación de 0,15 con Ecopetrol).
 
 > Los resultados históricos no garantizan rendimientos futuros.
+
 
 ## 8. Simulacro · S27 (10 de noviembre)
 
@@ -168,21 +186,20 @@ Selección de activos y parámetros → Descarga con yfinance → Alineación de
 - **Versión final / commit:** [Enlace]
 - **Evidencia de presentación:** [Enlace autorizado]
 - **Conclusiones finales:** [Síntesis]
-- **Limitaciones y posibles mejoras:** Solo se usan fechas comunes; no se modelan costos de transacción ni impuestos; mejoras posibles: optimización de portafolio (frontera eficiente), VaR, RSI y Bollinger Bands.
+- **Limitaciones y posibles mejoras:** Solo se usan fechas comunes; no se modelan costos de transacción ni impuestos; mejoras posibles: optimización de portafolio (frontera eficiente).
 
 ## 10. Bitácora de trabajo y aportes
 
 | Fecha | Integrante(s) | Investigación o decisión | Avance técnico / evidencia | Próximo paso |
 |---|---|---|---|---|
-| 2026-11-03 | [Todos] | Nombre del equipo (FinPy Labs), pregunta y activos | Código base en `app.py` y `metricas.py` | Probar con datos reales |
-| 2026-11-05 | [Nombre] | [Decisiones] | [Evidencia] | [Acción] |
+| 2026-11-03 | Isabella Hincapie Manuela Bohorquez - Yuliana Pineda | Nombre del equipo (STATTUM), pregunta y activos | Decisión de como se iba a trabajar, preguntas a resolver y objetivos | Elegir tickers a analizar |
+| 2026-11-05 | Isabella Hincapie Manuela Bohorquez - Yuliana Pineda | Codigo base  | Se ejecutó el notebook en Google Colab con datos reales de Yahoo Finance: la descarga funcionó para los 4 activos y se obtuvo la tabla de indicadores. Primer resultado: Cibest con el mejor Sharpe y Éxito con la mayor caída (−66,59 %). |Verificar los símbolos `.CL` en Yahoo Finance, fijar el período del análisis, preparar las capturas y publicar la app en Streamlit. |
 | 2026-11-10 | [Nombre] | [Retroalimentación] | [Cambio] | [Acción] |
 
 ## Fundamento en los recursos de consulta
 
 | Recurso | Qué tomamos de él | Dónde se usa |
 |---|---|---|
-| Libro del curso (programación y analítica financiera) | Conceptos de retorno, riesgo y visualización. **[Pendiente: citar capítulos y sesiones S25–S26 exactas]** | Secciones 2 y 4 |
 | [yfinance](https://ranaroussi.github.io/yfinance/) | `yf.download` con varios tickers a la vez. La fecha `start` es inclusiva y `end` es exclusiva, por eso la app suma un día a la fecha final. Se fija `auto_adjust=True` para usar precios ajustados. Con varios tickers devuelve columnas multinivel; la app toma `["Close"]`. | `app.py` → `cargar_precios` |
 | [pandas](https://pandas.pydata.org/docs/) | `pct_change` (retornos), `rolling` (medias y volatilidad móvil), `cummax` (drawdown), `corr` y `cov` | `metricas.py` y `app.py` |
 | [Streamlit](https://docs.streamlit.io/) | `st.sidebar`, `st.multiselect`, `st.slider`, `st.tabs`, `st.cache_data` (caché de descargas) y `st.download_button` | `app.py` |
