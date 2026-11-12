@@ -9,7 +9,7 @@
 
 - **Nombre de la aplicación:** Stattum
 - **Equipo e integrantes:** Isabella Hincapie - Manuela Bohorquez - Yuliana Pineda
-- **Enlace a la aplicación:** https://stattum-jewqn7xuv5nbrt88fheqen.streamlit.app/ 
+- **Enlace a la aplicación:** https://stattum-app64783ijbgdhuiow958478.streamlit.app/ 
 - **Repositorio del proyecto:** [https://github.com/isahincapiecontacto-netizen/Stattum](https://github.com/isahincapiecontacto-netizen/Stattum)
 - **Última actualización:** 2026-11-08
 
